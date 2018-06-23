@@ -30,7 +30,7 @@ class ClassifierUtility:
                 indexes.append(key)
                 scores.append(dict_scores[key])
             
-            return pd.DataFrame(data=scores, index=indexes)
+            return pd.DataFrame(data=scores, index=indexes)*100 
             
         except:
             print("[doCrossValidation]")
@@ -95,7 +95,7 @@ class ClassifierUtility:
             df_keep_whois_result = self.doABTesting(df_keep_whois, columns_for_testing)
             df_discard_whois_result = self.doABTesting(df_discard_whois, columns_for_testing)
             
-            names = ["Metric(5-fold mean)", "WHOIS"]
+            names = ["Metric(5-fold mean(%))", "WHOIS"]
             iterables = [["Accuracy", "Precision", "Recall", "F1 Score"], ["keep", "discard"]]
             col_index = pd.MultiIndex.from_product(iterables=iterables, names=names)
             row_index = df_keep_whois_result.index

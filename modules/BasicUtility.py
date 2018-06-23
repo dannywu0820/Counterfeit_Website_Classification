@@ -65,15 +65,15 @@ class BasicUtility:
                 if 'dummy' not in column_name:
                     size = dataframe[column_name].value_counts().sum()
                     amount_of_missings = num_of_samples - size
-                    proportion_of_missings = amount_of_missings / num_of_samples
+                    proportion_of_missings = amount_of_missings * 100 / num_of_samples
                     amount_and_proportion.append( [amount_of_missings, proportion_of_missings] )
                 else:
                     histogram = dataframe[column_name].value_counts()
                     amount_of_missings = num_of_samples - histogram[0]
-                    proportion_of_missings = amount_of_missings / num_of_samples
+                    proportion_of_missings = amount_of_missings * 100 / num_of_samples
                     amount_and_proportion.append( [amount_of_missings, proportion_of_missings] )
                     
-            return pd.DataFrame(data=amount_and_proportion, index=column_names, columns=['Amount', 'Proportion'])
+            return pd.DataFrame(data=amount_and_proportion, index=column_names, columns=['Amount', 'Proportion(%)'])
                     
         except:
             print("[getMissingValueRate]")
@@ -96,9 +96,9 @@ class BasicUtility:
                 for column_name in column_names:
                     size = dataframe[column_name].value_counts().sum()
                     num_of_missings = num_of_samples - size
-                    missings.append([num_of_missings, num_of_missings/num_of_samples])
+                    missings.append([num_of_missings, num_of_missings * 100 / num_of_samples])
                     
-                return pd.DataFrame(data=missings, index=column_names, columns=['amount', 'proportion'])
+                return pd.DataFrame(data=missings, index=column_names, columns=['Amount', 'Proportion(%)'])
 
         except:
             print("[getMissingRates]")
